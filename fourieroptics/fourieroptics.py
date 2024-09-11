@@ -1,5 +1,4 @@
 import numpy as np
-import numpy.fft as fft
 from typing import Tuple
 from scipy.fftpack import fft2, ifft2, fftshift, ifftshift
 
@@ -173,15 +172,15 @@ def propIR_F(u1: np.ndarray, L: float, lam: float, z: float) -> np.ndarray:
     x = np.linspace(-L / 2, L / 2, M)
     X, Y = np.meshgrid(x, x)
     h = (1 / (1j * lam * z)) * np.exp((1j * k) / (2 * z) * (X**2 + Y**2))
-    H = fft.fftshift(h)
-    H = fft.fft2(H) * dx**2
+    H = fftshift(h)
+    H = fft2(H) * dx**2
 
-    U1 = fft.fftshift(u1)
-    U1 = fft.fft2(U1)
+    U1 = fftshift(u1)
+    U1 = fft2(U1)
 
     U2 = U1 * H
-    u2 = fft.ifft2(U2)
-    u2 = fft.ifftshift(u2)
+    u2 = ifft2(U2)
+    u2 = ifftshift(u2)
     return u2
 
 

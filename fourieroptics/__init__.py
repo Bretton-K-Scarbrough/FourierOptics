@@ -1,4 +1,4 @@
-from fourieroptics import (
+from .fourieroptics import (
     rect,
     rect2D,
     circ,
