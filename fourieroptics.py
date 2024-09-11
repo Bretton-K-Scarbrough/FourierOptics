@@ -1,11 +1,7 @@
 import numpy as np
 import numpy.fft as fft
 from typing import Tuple
-from numpy.fft import fftshift, ifftshift, fft2, ifft2
-
-# import matplotlib.pyplot as plt
-
-PI = np.pi
+from scipy.fftpack import fft2, ifft2, fftshift, ifftshift
 
 
 def rect(t: np.ndarray, T: float = 1.0, t0: float = 0.0) -> np.ndarray:
@@ -82,9 +78,14 @@ def propFF(u1: np.ndarray, L1: float, lam: float, z: float) -> Tuple[np.ndarray,
         L2 : float
              Physical length in the observation plane.
     """
+    assert u1.ndim == 2, "Input field u1 must be a 2D array"
+    assert L1 > 0, "Physical length L must be positive"
+    assert lam > 0, "Wavelength lam must be positive"
+    assert z != 0, "Propagation distance z cannot be zero"
+
     M = np.shape(u1)[0]
     dx1 = L1 / M
-    k = 2 * PI / lam
+    k = 2 * np.pi / lam
 
     L2 = lam * z / dx1  # side length in obs plane
     x2 = np.linspace(-L2 / 2, L2 / 2, M)
@@ -114,6 +115,11 @@ def propTF_F(u1: np.ndarray, L: float, lam: float, z: float) -> np.ndarray:
         u2 : np.ndarray (M,M), complex
              2D complex array Propagated field in the observation plane.
     """
+
+    assert u1.ndim == 2, "Input field u1 must be a 2D array"
+    assert L > 0, "Physical length L must be positive"
+    assert lam > 0, "Wavelength lam must be positive"
+    assert z != 0, "Propagation distance z cannot be zero"
 
     M = u1.shape[0]
     dx = L / M
@@ -156,9 +162,14 @@ def propIR_F(u1: np.ndarray, L: float, lam: float, z: float) -> np.ndarray:
              2D complex array Propagated field in the observation plane.
     """
 
+    assert u1.ndim == 2, "Input field u1 must be a 2D array"
+    assert L > 0, "Physical length L must be positive"
+    assert lam > 0, "Wavelength lam must be positive"
+    assert z != 0, "Propagation distance z cannot be zero"
+
     M = np.shape(u1)[0]
     dx = L / M
-    k = 2 * PI / lam
+    k = 2 * np.pi / lam
     x = np.linspace(-L / 2, L / 2, M)
     X, Y = np.meshgrid(x, x)
     h = (1 / (1j * lam * z)) * np.exp((1j * k) / (2 * z) * (X**2 + Y**2))
@@ -192,9 +203,14 @@ def propTF_RS(u1: np.ndarray, L: float, lam: float, z: float) -> np.ndarray:
              2D complex array Propagated field in the observation plane.
     """
 
+    assert u1.ndim == 2, "Input field u1 must be a 2D array"
+    assert L > 0, "Physical length L must be positive"
+    assert lam > 0, "Wavelength lam must be positive"
+    assert z != 0, "Propagation distance z cannot be zero"
+
     M = u1.shape[0]  # Get input field array size
     dx = L / M  # Sample interval
-    k = 2 * PI / lam
+    k = 2 * np.pi / lam
 
     # Frequency coordinates
     fx = np.linspace(-1 / (2 * dx), 1 / (2 * dx) - 1 / L, M)
@@ -233,12 +249,17 @@ def propIR_RS(u1: np.ndarray, L: float, lam: float, z: float) -> np.ndarray:
         u2 : np.ndarray (M,M), complex
              2D complex array Propagated field in the observation plane.
     """
+    assert u1.ndim == 2, "Input field u1 must be a 2D array"
+    assert L > 0, "Physical length L must be positive"
+    assert lam > 0, "Wavelength lam must be positive"
+    assert z != 0, "Propagation distance z cannot be zero"
+
     M = np.shape(u1)[0]
     dx = L / M
     x = np.linspace(-L / 2, L / 2 - dx, M)
-    k = 2 * PI / lam
+    k = 2 * np.pi / lam
     X, Y = np.meshgrid(x, x)
-    r = np.sqrt(X**2 + Y**2 + z**2)  # doing something stupid here
+    r = np.sqrt(X**2 + Y**2 + z**2)
     h = z / (1j * lam * r**2) * np.exp(1j * k * r)
     H = fftshift(h)
     H = fft2(H) * dx**2
