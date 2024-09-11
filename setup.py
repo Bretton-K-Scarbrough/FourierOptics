@@ -20,7 +20,7 @@ setup(
         "fourier optics",
     ],
     classifiers=[
-        "Development Status :: 1 - Devloping",
+        "Development Status :: 1 - Planning",
         "Intended Audience :: Developers",
         "Programming Language :: Python :: 3",
         "Operating System :: Unix",
