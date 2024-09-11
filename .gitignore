@@ -1,0 +1,10 @@
+# Ignore everything
+*
+
+# Specific files to not ignore
+!gitignore
+!README.md
+!fourieroptics.py
+!correct_pixel_pitch_test.py
+!4f-simulation.ipynb
+!simulation_for_grating_effects.py
