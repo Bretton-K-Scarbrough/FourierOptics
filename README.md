@@ -57,8 +57,8 @@ plt.ylabel("y (m)")
 
 z = 30  # distance to propagate in m
 
-# Propagates u1 via the Rayleigh-Sommerfeld kernel, using the TF approach
-u2 = prop.propTF_RS(u1, L, lam, z)
+# Propagates u1 via the Rayleigh-Sommerfeld kernel, using the transfer function approach
+u2 = prop.propTF_RayleighSommerfeld(u1, L, lam, z)
 I2 = np.abs(u2**2)
 plt.figure()
 plt.imshow(I2, cmap="jet", extent=(-L / 2, L / 2, -L / 2, L / 2))
@@ -74,6 +74,6 @@ plt.show()
 ## Calling Helper Functions
 The code below will call a helper function which will print the general design steps to creating a propagation simulation.
 ```Python
-import fouieroptics.helpers
-fourieroptics.helpers.design_steps()
+import fouieroptics
+fourieroptics.helpers.kernel_differences()
 ```

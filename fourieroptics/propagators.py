@@ -3,7 +3,9 @@ from typing import Tuple
 from scipy.fftpack import fft2, ifft2, fftshift, ifftshift
 
 
-def propFF(u1: np.ndarray, L1: float, lam: float, z: float) -> Tuple[np.ndarray, float]:
+def propFraunhofer(
+    u1: np.ndarray, L1: float, lam: float, z: float
+) -> Tuple[np.ndarray, float]:
     """
     Propagates some field, u1, to z using the Fraunhofer kernel. Note: this is the same as propagating to far field or through a lens. Assumes a monochromatic field distribution
 
@@ -42,7 +44,7 @@ def propFF(u1: np.ndarray, L1: float, lam: float, z: float) -> Tuple[np.ndarray,
     return u2, L2
 
 
-def propTF_F(u1: np.ndarray, L: float, lam: float, z: float) -> np.ndarray:
+def propTF_Fresnel(u1: np.ndarray, L: float, lam: float, z: float) -> np.ndarray:
     """
     Propagates some field, u1, to z using the Fresnel kernel transfer function approach.
 
@@ -86,7 +88,7 @@ def propTF_F(u1: np.ndarray, L: float, lam: float, z: float) -> np.ndarray:
     return u2
 
 
-def propIR_F(u1: np.ndarray, L: float, lam: float, z: float) -> np.ndarray:
+def propIR_Fresnel(u1: np.ndarray, L: float, lam: float, z: float) -> np.ndarray:
     """
     Propagates some field, u1, to z using the Fresnel kernel impulse response approach.
 
@@ -129,7 +131,9 @@ def propIR_F(u1: np.ndarray, L: float, lam: float, z: float) -> np.ndarray:
     return u2
 
 
-def propTF_RS(u1: np.ndarray, L: float, lam: float, z: float) -> np.ndarray:
+def propTF_RayleighSommerfeld(
+    u1: np.ndarray, L: float, lam: float, z: float
+) -> np.ndarray:
     """
     Propagates some field, u1, to z using the Rayleigh-Sommerfled kernel, transfer function approach.
 
@@ -176,7 +180,9 @@ def propTF_RS(u1: np.ndarray, L: float, lam: float, z: float) -> np.ndarray:
     return u2
 
 
-def propIR_RS(u1: np.ndarray, L: float, lam: float, z: float) -> np.ndarray:
+def propIR_RayleighSommerfeld(
+    u1: np.ndarray, L: float, lam: float, z: float
+) -> np.ndarray:
     """
     Propagates some field, u1, to z using the Rayleigh-Sommerfled kernel, transfer function approach.
 

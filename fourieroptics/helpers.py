@@ -40,6 +40,29 @@ def bandwidth_crieterion():
     print(criterion)
 
 
+def kernel_differences():
+    differences = """
+    1. Rayleigh-Sommerfeld Kernel:
+       - Exact solution for scalar wave propagation.
+       - Works for both near-field and far-field propagation.
+       - More computationally intensive, but high accuracy.
+       - Use when precision is needed for short or moderate distances.
+
+    2. Fresnel Approximation Kernel:
+       - Simplified version of RS, assumes paraxial approximation.
+       - Suitable for near to intermediate field propagation.
+       - Less computationally expensive, but maintains reasonable accuracy.
+       - Use for moderate distances or in optical systems like lenses.
+
+    3. Fraunhofer Approximation Kernel:
+       - Far-field approximation, assumes large propagation distance.
+       - Direct Fourier transform of the aperture function.
+       - Very computationally efficient, but applies only to far-field.
+       - Use when dealing with long distances or diffraction patterns.
+    """
+    print(differences)
+
+
 def fresnel_number(r: float, z: float, lam: float) -> float:
     """
     Calculates the fresnel number of an aperture
