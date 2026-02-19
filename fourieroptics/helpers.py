@@ -5,8 +5,8 @@ def design_steps():
 
     (2) Determine sampling regime
         (a) dx > lambda * z / L: TF propagation will work with minor aliasing
-        (b) dx > lambda * z / L: Critical sampling, TF approach
-        (c) dx > lambda * z / L: IR propagation will work with minor aliasing
+        (b) dx = lambda * z / L: Critical sampling, TF approach
+        (c) dx < lambda * z / L: IR propagation will work with minor aliasing
 
     (3) Consider source bandwidth criterion if you are using Fresnel
         propagator. Call bandwidth_criterion() also in this module to
