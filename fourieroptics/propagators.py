@@ -165,7 +165,7 @@ def propTF_RayleighSommerfeld(
     FX, FY = np.meshgrid(fx, fx)
 
     # Transfer function
-    H = np.exp(1j * k * z * np.sqrt(1 - (lam * FX) ** 2 - (lam * FY) ** 2))
+    H = np.exp(1j * k * z * np.sqrt((1.0 +0.0j) - (lam * FX) ** 2 - (lam * FY) ** 2))
     H = np.fft.fftshift(H)
 
     # FFT of the source field
@@ -184,7 +184,7 @@ def propIR_RayleighSommerfeld(
     u1: np.ndarray, L: float, lam: float, z: float
 ) -> np.ndarray:
     """
-    Propagates some field, u1, to z using the Rayleigh-Sommerfled kernel, transfer function approach.
+    Propagates some field, u1, to z using the Rayleigh-Sommerfled kernel, impulse response approach.
 
     #WARNING: It is important to check if the TF approach or IR approach is more accurate when calling this function. Look at trade of table in Chapter 5 of "Computational Fourier Optics" by David Voelz
 
